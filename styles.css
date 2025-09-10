@@ -1,0 +1,140 @@
+:root{
+  --bg: #fff;
+  --text: #0f1222;
+  --muted: #5f6675;
+
+  --tile-radius: 22px;
+  --tile-dim: clamp(240px, 30vw, 360px);
+  --tile-gap: clamp(16px, 3vw, 28px);
+
+  --overlay-darkness: 0.60;  /* базовая затемнённость плиток */
+  --hover-darkness: 0.16;    /* при ховере/фокусе */
+  --tap-delay: 950;          /* мс — для мобильной задержки */
+  --blur: 10px;
+  --shadow: 0 14px 48px rgba(10,14,29,.16);
+
+  --ease-out: cubic-bezier(.22,.9,.24,1);
+}
+
+*{ box-sizing: border-box; }
+html,body{ height: 100%; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container{ width:min(1100px,92vw); margin:0 auto; }
+
+/* --- Hero (заголовок слева, аватар справа) --- */
+.site-header{ padding: 24px 0 12px; }
+.site-header__inner{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:end;
+  gap: 16px 24px;
+}
+.headline{
+  margin:0;
+  font: 800 clamp(28px, 4.6vw, 48px)/1.1 Manrope, Inter, system-ui, sans-serif;
+  letter-spacing:-0.015em;
+}
+.hero-avatar{ display:flex; align-items:flex-end; }
+.avatar{
+  width:140px; height:140px; object-fit:cover; border-radius:18px;
+  box-shadow: 0 10px 34px rgba(0,0,0,.12);
+}
+
+.portal{ padding: 16px 0 38px; }
+.nojs{
+  display:inline-block; padding:8px 12px; border-radius:10px;
+  background:#f0f3f7; color:#334; font-weight:600;
+}
+
+/* --- Tiles --- */
+.tiles{
+  margin: 18px auto 10px;
+  width: fit-content;
+  display:grid;
+  grid-template-columns: repeat(2, var(--tile-dim));
+  grid-auto-rows: var(--tile-dim);
+  gap: var(--tile-gap);
+}
+
+.tile{
+  position:relative; display:block;
+  width:var(--tile-dim); height:var(--tile-dim);
+  border-radius:var(--tile-radius); overflow:hidden;
+  text-decoration:none; color:#fff; isolation:isolate;
+  box-shadow: var(--shadow);
+  transform: translateZ(0);
+  transition: transform .6s var(--ease-out);
+}
+
+.tile__bg{
+  position:absolute; inset:0;
+  background: center/cover no-repeat var(--img);
+  filter: brightness(1) saturate(1.06);
+  transition: transform .7s var(--ease-out), filter .7s var(--ease-out);
+  z-index:0;
+}
+.tile__fog{
+  position:absolute; inset:0;
+  background: radial-gradient(120% 120% at 50% 65%, rgba(0,0,0,0) 0%, rgba(0,0,0,var(--overlay-darkness)) 66%);
+  transition: opacity .45s ease; opacity:1; z-index:1;
+}
+.tile__glow{
+  position:absolute; inset:-2px; border-radius:inherit;
+  pointer-events:none; z-index:2; opacity:0;
+  background: radial-gradient(60% 60% at 50% 50%, color-mix(in oklab, var(--accent,#87f) 70%, white) 0%, transparent 60%);
+  filter: blur(var(--blur));
+  transition: opacity .45s ease;
+}
+.tile__meta{
+  position:absolute; inset:0; display:grid; align-content:end;
+  padding:18px 18px 16px; z-index:3;
+}
+.tile__title{
+  margin:0 0 6px; font: 800 clamp(18px,2.2vw,26px)/1.1 Manrope, Inter, system-ui, sans-serif;
+  letter-spacing:-0.01em; text-shadow: 0 2px 16px rgba(0,0,0,.45);
+}
+.tile__desc{
+  margin:0; font-size:14px; font-weight:500; max-width:92%;
+  color: rgba(255,255,255,.92); text-shadow: 0 2px 12px rgba(0,0,0,.42);
+}
+
+/* акцент для свечения */
+.tile{ --accent: attr(data-accent color, #87f); }
+
+/* Hover / focus (десктоп) */
+.tile:where(:hover,:focus-visible){ outline:none; transform: translateY(-2px); }
+.tile:where(:hover,:focus-visible) .tile__bg{ transform: scale(1.045); filter: brightness(1.09) saturate(1.14) contrast(1.02); }
+.tile:where(:hover,:focus-visible) .tile__fog{ opacity: var(--hover-darkness); }
+.tile:where(:hover,:focus-visible) .tile__glow{ opacity: 1; }
+
+/* Активное состояние при моб. тапе */
+.tile--active{ transform: translateY(-1px); }
+.tile--active .tile__bg{ transform: scale(1.06); filter: brightness(1.16) saturate(1.2); }
+.tile--active .tile__fog{ opacity:.12; }
+.tile--active .tile__glow{ opacity:1; animation: pulse var(--tap-delay)ms ease-in-out 1; }
+@keyframes pulse{
+  0%{ opacity:.85; } 50%{ opacity:1; } 100%{ opacity:.6; }
+}
+
+/* Доступность */
+.visually-hidden{
+  position:absolute!important; width:1px;height:1px;margin:-1px;border:0;padding:0;
+  white-space:nowrap; clip-path: inset(50%); clip: rect(0 0 0 0); overflow:hidden;
+}
+
+.site-footer{ padding: 26px 0 40px; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce){
+  .tile, .tile__bg, .tile__fog, .tile__glow{ transition:none !important; }
+  .tile__glow{ animation:none !important; }
+}

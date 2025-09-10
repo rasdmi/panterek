@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Дима — Портал</title>
+
+  <!-- Шрифты -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 720px)" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <div class="hero-copy">
+        <h1 class="headline">Привет, я Дима,<br> выбирай, чего сегодня будем творить</h1>
+      </div>
+      <div class="hero-avatar">
+        <img class="avatar" src="media/di.png" alt="Дима" width="140" height="140">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="portal" aria-labelledby="portal-title">
+      <h2 id="portal-title" class="visually-hidden">Выбор раздела</h2>
+      <div id="tiles" class="tiles"></div>
+      <noscript class="nojs">Для интерактивности нужен JavaScript.</noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <small>© <span id="year"></span> Дима</small>
+  </footer>
+
+  <script src="content.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
