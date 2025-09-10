@@ -1,43 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Дима — Портал</title>
-
-  <!-- Шрифты -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ПАНТЕРЕК — спасение из зоомагазина</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="mobile.css" media="(max-width: 720px)" />
-  <meta name="theme-color" content="#ffffff" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 900px)" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-header__inner container">
-      <div class="hero-copy">
-        <h1 class="headline">Привет, я Дима,<br> выбирай, чего сегодня будем творить</h1>
-      </div>
-      <div class="hero-avatar">
-        <img class="avatar" src="media/di.png" alt="Дима" width="140" height="140">
-      </div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="emoji">🦎</span>
+      <strong>ПАНТЕРЕК</strong>
+      <span class="subtitle">Зоо-рептилии</span>
     </div>
+    <div class="money" id="money">₽ 10 000</div>
   </header>
 
-  <main class="container">
-    <section class="portal" aria-labelledby="portal-title">
-      <h2 id="portal-title" class="visually-hidden">Выбор раздела</h2>
-      <div id="tiles" class="tiles"></div>
-      <noscript class="nojs">Для интерактивности нужен JavaScript.</noscript>
+  <main class="wrap">
+    <!-- HUD -->
+    <aside class="hud">
+      <div>Цель: поймайте варана сеткой</div>
+      <div id="status">Готово к ловле</div>
+      <div id="progress">Спасено: 0 • Потерь: 0</div>
+      <div id="timer">Время: 00:00</div>
+    </aside>
+
+    <!-- Canvas игрового поля -->
+    <canvas id="game" width="1200" height="700" aria-label="Игровое поле"></canvas>
+
+    <!-- Панель магазина -->
+    <section class="shop" id="shop">
+      <h3>Магазин рептилий</h3>
+      <div class="items" id="shopItems"></div>
+      <button class="close" id="closeShop" aria-label="Закрыть магазин">Закрыть</button>
+    </section>
+
+    <!-- Корзина сохранённых -->
+    <section class="basket">
+      <h4>Корзина спасения</h4>
+      <ul id="basketList"></ul>
+    </section>
+
+    <!-- Мобильные элементы управления -->
+    <section class="mobile-ui" id="mobileUI" aria-hidden="true">
+      <div class="stick" id="stick">
+        <div class="knob" id="stickKnob"></div>
+      </div>
+      <div class="buttons">
+        <button id="netBtn" class="btn action">СЕТКА</button>
+        <button id="shopBtn" class="btn">МАГАЗИН</button>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer container">
-    <small>© <span id="year"></span> Дима</small>
+  <footer class="foot">
+    <small>© Игра “ПАТНЕРЕК”. Спасите людей и животных. Клик/тап — замах сеткой.</small>
   </footer>
 
-  <script src="content.js" defer></script>
-  <script src="script.js" defer></script>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

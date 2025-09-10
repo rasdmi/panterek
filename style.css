@@ -1,0 +1,60 @@
+:root{
+  --bg:#0c0f12;
+  --ink:#ecf2f8;
+  --muted:#9fb3c8;
+  --accent:#4cc3ff;
+  --danger:#ff4d6d;
+  --ok:#4cd964;
+  --card:#11161c;
+  --panel:#0f141a;
+  --glass:rgba(255,255,255,.06);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:linear-gradient(180deg,#0b0e12,#10161d 40%,#0b0e12);
+  color:var(--ink);
+  font:500 16px/1.5 system-ui,Segoe UI,Inter,Manrope,Roboto,sans-serif;
+}
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 16px;border-bottom:1px solid #1c2630;background:var(--panel)
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand .emoji{filter:drop-shadow(0 0 6px rgba(76,195,255,.5))}
+.brand strong{letter-spacing:.08em}
+.brand .subtitle{color:var(--muted);font-size:12px}
+.money{font-weight:800;color:var(--ok)}
+.wrap{display:grid;grid-template-columns:1fr 320px;gap:16px;max-width:1280px;margin:16px auto;padding:0 12px;align-items:start}
+#game{width:100%;height:auto;background:#15202b;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.hud{
+  position:absolute;left:20px;top:72px;z-index:5;
+  background:var(--glass);backdrop-filter:blur(8px);
+  border:1px solid #25313c;border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25)
+}
+.hud #status{color:var(--accent)}
+.hud #progress{color:#cbd7e6}
+.hud #timer{color:#d7a3ff}
+.shop{
+  position:relative;background:var(--card);border:1px solid #22303c;border-radius:16px;padding:14px;
+}
+.shop h3{margin:0 0 8px}
+.items{display:grid;grid-template-columns:1fr;gap:8px;max-height:520px;overflow:auto;padding-right:6px}
+.item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;
+  padding:10px;border:1px solid #22303c;border-radius:12px;background:rgba(255,255,255,.02)
+}
+.item .meta small{color:var(--muted)}
+.item .buy{padding:8px 10px;border-radius:10px;border:1px solid #2a3a47;background:#14202a;color:#cfe9ff;cursor:pointer}
+.item .buy:disabled{opacity:.4;cursor:not-allowed}
+.close{width:100%;margin-top:8px;border-radius:12px;padding:10px;border:1px solid #2a3a47;background:#141a20;color:#cfe9ff}
+.basket{
+  background:var(--card);border:1px solid #22303c;border-radius:16px;padding:14px;
+}
+.basket h4{margin:0 0 8px}
+#basketList{list-style:none;margin:0;padding:0;display:grid;gap:6px;max-height:220px;overflow:auto}
+#basketList li{padding:6px 8px;border:1px solid #243442;border-radius:8px;background:rgba(255,255,255,.03);color:#cfe9ff}
+
+.mobile-ui{display:none}
+.foot{max-width:1280px;margin:12px auto;padding:0 12px;color:#8ea4b8}
